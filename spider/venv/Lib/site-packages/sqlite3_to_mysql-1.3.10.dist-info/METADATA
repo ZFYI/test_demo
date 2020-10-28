@@ -1,0 +1,110 @@
+Metadata-Version: 2.1
+Name: sqlite3-to-mysql
+Version: 1.3.10
+Summary: A simple Python tool to transfer data from SQLite 3 to MySQL
+Home-page: https://github.com/techouse/sqlite3-to-mysql
+Author: Klemen Tusar
+Author-email: techouse@gmail.com
+License: MIT
+Project-URL: Source, https://github.com/techouse/sqlite3-to-mysql
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Database
+Requires-Python: >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*
+Description-Content-Type: text/markdown
+Requires-Dist: Click (>=7.0)
+Requires-Dist: mysql-connector-python (>=8.0.18)
+Requires-Dist: pytimeparse (>=1.1.8)
+Requires-Dist: six (>=1.12.0)
+Requires-Dist: simplejson (>=3.16.0)
+Requires-Dist: tqdm (>=4.35.0)
+Requires-Dist: packaging (>=20.3)
+Requires-Dist: tabulate
+
+[![PyPI](https://img.shields.io/pypi/v/sqlite3-to-mysql)](https://pypi.org/project/sqlite3-to-mysql/)
+[![Downloads](https://pepy.tech/badge/sqlite3-to-mysql)](https://pepy.tech/project/sqlite3-to-mysql)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/sqlite3-to-mysql)](https://pypi.org/project/sqlite3-to-mysql/)
+[![MySQL Support](https://img.shields.io/static/v1?label=MySQL&message=5.5+|+5.6+|+5.7+|+8.0&color=2b5d80)](https://img.shields.io/static/v1?label=MySQL&message=5.6+|+5.7+|+8.0&color=2b5d80)
+[![MariaDB Support](https://img.shields.io/static/v1?label=MariaDB&message=5.5+|+10.0+|+10.1+|+10.2+|+10.3+|+10.4+|+10.5&color=C0765A)](https://img.shields.io/static/v1?label=MariaDB&message=10.0+|+10.1+|+10.2+|+10.3+|+10.4+|+10.5&color=C0765A)
+[![GitHub license](https://img.shields.io/github/license/techouse/sqlite3-to-mysql)](https://github.com/techouse/sqlite3-to-mysql/blob/master/LICENSE)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d33b59d35b924711aae9418741a923ae)](https://www.codacy.com/manual/techouse/sqlite3-to-mysql?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=techouse/sqlite3-to-mysql&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.com/techouse/sqlite3-to-mysql.svg?branch=master)](https://travis-ci.com/techouse/sqlite3-to-mysql)
+[![codecov](https://codecov.io/gh/techouse/sqlite3-to-mysql/branch/master/graph/badge.svg)](https://codecov.io/gh/techouse/sqlite3-to-mysql)
+[![GitHub stars](https://img.shields.io/github/stars/techouse/sqlite3-to-mysql.svg?style=social&label=Star&maxAge=2592000)](https://github.com/techouse/sqlite3-to-mysql/stargazers)
+
+
+# SQLite3 to MySQL
+
+#### A simple Python tool to transfer data from SQLite 3 to MySQL.
+
+I originally wrote this simple program as a standalone script and published it
+as a [gist](https://gist.github.com/techouse/4deb94eee58a02d104c6) as an answer
+to this [Stack Overflow question](https://stackoverflow.com/questions/18671/quick-easy-way-to-migrate-sqlite3-to-mysql/32243979#32243979).
+Since then quite some people have taken interest in it since it's so simple and
+effective. Therefore I finally moved my lazy bones and made a GitHub repository :octopus:.
+
+### How to run
+
+```bash
+pip install sqlite3-to-mysql
+sqlite3mysql --help
+```
+
+### Usage
+```
+Usage: sqlite3mysql [OPTIONS]
+
+  Transfer SQLite to MySQL using the provided CLI options.
+
+Options:
+  -f, --sqlite-file PATH      SQLite3 database file  [required]
+  -t, --sqlite-tables TEXT    Transfer only these specific tables (space
+                              separated table names). Implies --without-
+                              foreign-keys which inhibits the transfer of
+                              foreign keys.
+
+  -X, --without-foreign-keys  Do not transfer foreign keys.
+  -d, --mysql-database TEXT   MySQL database name  [required]
+  -u, --mysql-user TEXT       MySQL user  [required]
+  -p, --mysql-password TEXT   MySQL password
+  -h, --mysql-host TEXT       MySQL host. Defaults to localhost.
+  -P, --mysql-port INTEGER    MySQL port. Defaults to 3306.
+  --mysql-integer-type TEXT   MySQL default integer field type. Defaults to
+                              INT(11).
+
+  --mysql-string-type TEXT    MySQL default string field type. Defaults to
+                              VARCHAR(255).
+
+  -T, --use-fulltext          Use FULLTEXT indexes on TEXT columns. Will throw
+                              an error if your MySQL version does not support
+                              InnoDB FULLTEXT indexes!
+
+  --with-rowid                Transfer rowid columns.
+  -c, --chunk INTEGER         Chunk reading/writing SQL records
+  -l, --log-file PATH         Log file
+  -q, --quiet                 Quiet. Display only errors.
+  --version                   Show the version and exit.
+  --help                      Show this message and exit.
+```
+
+### Note
+After a __LONG__ time I finally found the time to write the complimentary script to transfer
+[MySQL to SQLite3](https://github.com/techouse/mysql-to-sqlite3). Check it out :)
+
